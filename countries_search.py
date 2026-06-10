@@ -1,0 +1,1 @@
+# • Buscar un país por nombre (coincidencia parcial o exacta).
