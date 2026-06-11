@@ -9,12 +9,28 @@ def validar_lista_cargada(paises):
 
 
 def validar_entero_no_negativo(valor_str, nombre_campo):
-    try:
-        valor = int(valor_str)
-    except ValueError:
-        raise ValueError(f"La {nombre_campo} debe ser un número entero.")
+    valor_limpio = valor_str.strip()
+
+    if valor_limpio == "":
+        raise ValueError(
+            f"La {nombre_campo} no puede estar vacía. Debe ingresar un número entero."
+        )
+
+    if "." in valor_limpio or "," in valor_limpio:
+        raise ValueError(
+            f"La {nombre_campo} debe ser un número entero, no un decimal."
+        )
+
+    if not valor_limpio.isdigit():
+        raise ValueError(
+            f"La {nombre_campo} debe ser un número entero (sin letras ni símbolos)."
+        )
+
+    valor = int(valor_limpio)
     if valor < 0:
-        raise ValueError(f"La {nombre_campo} no puede ser negativa.")
+        raise ValueError(
+            f"La {nombre_campo} no puede ser negativa. Ingrese un número igual o mayor a 0."
+        )
     return valor
 
 
