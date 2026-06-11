@@ -1,6 +1,7 @@
 # Importo funciones que necesito en este file
 from countries_csv import leer_csv
 from countries_helpers import validar_lista_cargada 
+from countries_management import alta_nuevo_pais
 
 
 # Menu
@@ -9,7 +10,7 @@ from countries_helpers import validar_lista_cargada
 def mostrar_menu():
     print("\n===== Gestión de Datos de Países =====")
     print("1. Primera carga de paises desde la base de datos (csv)")
-    print("2. Mostrar paises") ##usar paginado
+    print("2. Mostrar paises") ##usar paginado --- este podria ser un nice to have porque no lo pide la consigna
     print("3. Buscar país por nombre")
     print("4. Agregar un nuevo país")
     print("5. Actualizar datos de un país")
@@ -41,7 +42,7 @@ while opcion != 8:
                     pass
             elif opcion == 4:
                 if validar_lista_cargada(paises):
-                    pass
+                    alta_nuevo_pais(paises)
             elif opcion == 5:
                 if validar_lista_cargada(paises):
                     pass

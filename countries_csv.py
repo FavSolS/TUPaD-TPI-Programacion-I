@@ -18,3 +18,8 @@ def leer_csv():
     print(f"\nSe cargaron {len(paises)} países correctamente.")
 
     return paises
+
+
+def agregar_csv(nuevo_pais):
+    with open('countries.csv', 'a') as archivo:
+        archivo.write(f"{nuevo_pais['nombre']},{nuevo_pais['poblacion']},{nuevo_pais['superficie']},{nuevo_pais['continente']}\n")
