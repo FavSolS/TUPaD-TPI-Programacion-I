@@ -7,17 +7,45 @@ def validar_lista_cargada(paises):
     return True
 
 
+def validar_entero_no_negativo(valor_str, nombre_campo):
+    try:
+        valor = int(valor_str)
+    except ValueError:
+        raise ValueError(f"La {nombre_campo} debe ser un número entero.")
+    if valor < 0:
+        raise ValueError(f"La {nombre_campo} no puede ser negativa.")
+    return valor
+
+
+def leer_entero_no_negativo(mensaje, nombre_campo):
+    valor_str = input(mensaje)
+    return validar_entero_no_negativo(valor_str, nombre_campo)
+
+
+def normalizar_texto(texto):
+    return texto.strip().lower()
+
+
+def buscar_por_texto(paises, campo, texto, coincidencia_exacta=False):
+    texto_normalizado = normalizar_texto(texto)
+    resultados = []
+    for pais in paises:
+        valor_normalizado = normalizar_texto(pais[campo])
+        if coincidencia_exacta:
+            coincide = valor_normalizado == texto_normalizado
+        else:
+            coincide = texto_normalizado in valor_normalizado
+        if coincide:
+            resultados.append(pais)
+    return resultados
+
+
 def nombre_existe(paises, nombre):
-    # Strip elimina espacios, lower convierte a minusculas. Nos sirve para comparar nombres siempre en las mismas condiciones sin importar como haya sido escrito
-    nombre_normalizado = nombre.strip().lower()
-    for item in paises:
-        if item['nombre'].strip().lower() == nombre_normalizado:
-            return True
-    return False
+    return len(buscar_por_texto(paises, 'nombre', nombre, coincidencia_exacta=True)) > 0
 
 # Funciones auxiliares para el sort
 def obtener_nombre(pais):
-    return pais['nombre'].lower()
+    return normalizar_texto(pais['nombre'])
 
 def obtener_poblacion(pais):
     return pais['poblacion']
