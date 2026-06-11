@@ -34,11 +34,10 @@ while opcion != 9:
         try:
             opcion = int(input("Seleccione una opción: "))
             if opcion == 1:
-                #Si la lista ya esta cargada ya no podemos entrar aca
-                    if validar_lista_cargada(paises):
-                        print("\nLa lista de paises ya fue cargada, por favor selecciona otra opción.")
-                    else:
-                        paises = leer_csv()
+                if len(paises) > 0:
+                    print("\nLa lista de paises ya fue cargada, por favor selecciona otra opción.")
+                else:
+                    paises = leer_csv()
                 # print para debug/check
                 # print(paises)
             elif opcion == 2:
