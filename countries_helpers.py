@@ -14,3 +14,13 @@ def nombre_existe(paises, nombre):
         if item['nombre'].strip().lower() == nombre_normalizado:
             return True
     return False
+
+# Funciones auxiliares para el sort
+def obtener_nombre(pais):
+    return pais['nombre'].lower()
+
+def obtener_poblacion(pais):
+    return pais['poblacion']
+
+def obtener_superficie(pais):
+    return pais['superficie']
