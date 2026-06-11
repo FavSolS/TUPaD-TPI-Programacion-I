@@ -1,12 +1,15 @@
 import unicodedata
 
 # Funciones auxiliares que son reutilizadas en los otros metodos
+
 def validar_lista_cargada(paises):
     if len(paises) == 0:
         print("Error: No hay datos cargados. Seleccione la opción 1 primero.")
         return False
     return True
 
+
+# Funciones auxiliares para validacion de datos ingresados por el usuario
 
 def validar_entero_no_negativo(valor_str, nombre_campo):
     valor_limpio = valor_str.strip()
@@ -39,12 +42,17 @@ def leer_entero_no_negativo(mensaje, nombre_campo):
     return validar_entero_no_negativo(valor_str, nombre_campo)
 
 
+# Funciones auxiliares para busqueda y comparacion de texto
+
 def normalizar_texto(texto):
+    # Strip elimina espacios, lower convierte a minusculas y unicodedata quita acentos.
+    # Nos sirve para comparar textos sin importar mayusculas, espacios ni tildes.
     texto = texto.strip().lower()
     texto = unicodedata.normalize("NFD", texto)
     return "".join(c for c in texto if unicodedata.category(c) != "Mn")
 
 
+# Buscar paises por coincidencia parcial o exacta en un campo de texto
 def buscar_por_texto(paises, campo, texto, coincidencia_exacta=False):
     texto_normalizado = normalizar_texto(texto)
     resultados = []
@@ -60,7 +68,9 @@ def buscar_por_texto(paises, campo, texto, coincidencia_exacta=False):
 
 
 def nombre_existe(paises, nombre):
+    # Llamo funcion auxiliar para comparar el nombre de forma exacta
     return len(buscar_por_texto(paises, 'nombre', nombre, coincidencia_exacta=True)) > 0
+
 
 # Funciones auxiliares para el sort
 def obtener_nombre(pais):

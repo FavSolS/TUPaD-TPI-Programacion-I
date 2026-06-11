@@ -5,6 +5,7 @@
 
 from countries_helpers import buscar_por_texto, validar_entero_no_negativo
 
+
 def _formatear_numero(numero):
     return f"{numero:,}".replace(",", ".")
 
@@ -36,6 +37,7 @@ def mostrar_resultados(resultados, descripcion_filtro):
     print()
 
 
+# Llamo funcion auxiliar para coincidencia parcial por continente
 def filtrar_por_continente(paises, continente):
     return buscar_por_texto(paises, 'continente', continente)
 
@@ -55,6 +57,8 @@ def filtrar_por_superficie(paises, superficie_min, superficie_max):
             resultados.append(pais)
     return resultados
 
+
+# Funciones auxiliares para la entrada de datos del filtro
 
 def _leer_criterio_filtro():
     while True:
@@ -103,6 +107,7 @@ def _leer_rango_numerico(nombre_rango, nombre_min, nombre_max):
             if min_str.strip().lower() in ("salir", "0"):
                 return None
 
+            # Llamo funcion auxiliar para validar el entero ingresado
             valor_min = validar_entero_no_negativo(min_str, nombre_min)
 
             max_str = input(f"Ingrese la {nombre_max}: ")
