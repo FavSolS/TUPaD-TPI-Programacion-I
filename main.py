@@ -1,7 +1,7 @@
 # Importo funciones que necesito en este file
 from countries_csv import leer_csv
 from countries_helpers import validar_lista_cargada 
-from countries_management import alta_nuevo_pais
+from countries_management import alta_nuevo_pais, modificar_pais
 
 
 # Menu
@@ -26,12 +26,16 @@ paises = []
 # Inicialización de opcion del menu
 opcion = 0
 
-while opcion != 8:
+while opcion != 9:
         mostrar_menu()
         try:
             opcion = int(input("Seleccione una opción: "))
             if opcion == 1:
-                paises = leer_csv()
+                #Si la lista ya esta cargada ya no podemos entrar aca
+                    if validar_lista_cargada(paises):
+                        print("\nLa lista de paises ya fue cargada, por favor selecciona otra opción.")
+                    else:
+                        paises = leer_csv()
                 # print para debug/check
                 # print(paises)
             elif opcion == 2:
@@ -45,7 +49,7 @@ while opcion != 8:
                     alta_nuevo_pais(paises)
             elif opcion == 5:
                 if validar_lista_cargada(paises):
-                    pass
+                    modificar_pais(paises)
             elif opcion == 6:
                 if validar_lista_cargada(paises):
                     pass
