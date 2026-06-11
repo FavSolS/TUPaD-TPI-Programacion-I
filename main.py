@@ -2,6 +2,7 @@
 from countries_csv import leer_csv
 from countries_helpers import validar_lista_cargada 
 from countries_management import alta_nuevo_pais, modificar_pais
+from countries_search import buscar_pais
 
 
 # Menu
@@ -9,11 +10,11 @@ from countries_management import alta_nuevo_pais, modificar_pais
 ##Función básica para mostrarle el menu al usuario.
 def mostrar_menu():
     print("\n===== Gestión de Datos de Países =====")
-    print("1. Primera carga de paises desde la base de datos (csv)")
+    print("1. Primera carga de paises desde la base de datos (csv)") #done
     print("2. Mostrar paises") ##usar paginado --- este podria ser un nice to have porque no lo pide la consigna
-    print("3. Buscar país por nombre")
-    print("4. Agregar un nuevo país")
-    print("5. Actualizar datos de un país")
+    print("3. Buscar país por nombre") 
+    print("4. Agregar un nuevo país") #done
+    print("5. Actualizar datos de un país") #done
     print("6. Ordenar países")
     print("7. Filtrar países")
     print("8. Obtener estadísticas")
@@ -43,7 +44,7 @@ while opcion != 9:
                 pass
             elif opcion == 3:
                 if validar_lista_cargada(paises):
-                    pass
+                    buscar_pais(paises)
             elif opcion == 4:
                 if validar_lista_cargada(paises):
                     alta_nuevo_pais(paises)
