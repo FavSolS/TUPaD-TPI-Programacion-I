@@ -1,1 +1,63 @@
+# Importo funciones que necesito en este file
+from countries_csv import leer_csv
+from countries_helpers import validar_lista_cargada 
+
+
 # Menu
+
+##Función básica para mostrarle el menu al usuario.
+def mostrar_menu():
+    print("\n===== Gestión de Datos de Países =====")
+    print("1. Primera carga de paises desde la base de datos (csv)")
+    print("2. Mostrar paises") ##usar paginado
+    print("3. Buscar país por nombre")
+    print("4. Agregar un nuevo país")
+    print("5. Actualizar datos de un país")
+    print("6. Ordenar países")
+    print("7. Filtrar países")
+    print("8. Obtener estadísticas")
+    print("9. Salir")
+    print("==============================================")
+
+    
+# Inicialización del listado de paises que nos traeremos del csv
+paises = []
+# Inicialización de opcion del menu
+opcion = 0
+
+while opcion != 8:
+        mostrar_menu()
+        try:
+            opcion = int(input("Seleccione una opción: "))
+            if opcion == 1:
+                paises = leer_csv()
+                # print para debug/check
+                # print(paises)
+            elif opcion == 2:
+               if validar_lista_cargada(paises):
+                pass
+            elif opcion == 3:
+                if validar_lista_cargada(paises):
+                    pass
+            elif opcion == 4:
+                if validar_lista_cargada(paises):
+                    pass
+            elif opcion == 5:
+                if validar_lista_cargada(paises):
+                    pass
+            elif opcion == 6:
+                if validar_lista_cargada(paises):
+                    pass
+            elif opcion == 7:
+                if validar_lista_cargada(paises):
+                    pass
+            elif opcion == 8:
+                if validar_lista_cargada(paises):
+                    pass
+            elif opcion == 9:
+                print("Saliendo del sistema. ¡Adiós!")
+                break
+            else:
+                print("Error: Opción inválida. Ingrese un número entre 1 y 8.")
+        except ValueError as e:
+            print(f"Error: {e}")
