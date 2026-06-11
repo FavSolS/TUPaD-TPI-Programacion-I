@@ -1,5 +1,6 @@
-# Funciones auxiliares que son reutilizadas en los otros metodos
+import unicodedata
 
+# Funciones auxiliares que son reutilizadas en los otros metodos
 def validar_lista_cargada(paises):
     if len(paises) == 0:
         print("Error: No hay datos cargados. Seleccione la opción 1 primero.")
@@ -23,7 +24,9 @@ def leer_entero_no_negativo(mensaje, nombre_campo):
 
 
 def normalizar_texto(texto):
-    return texto.strip().lower()
+    texto = texto.strip().lower()
+    texto = unicodedata.normalize("NFD", texto)
+    return "".join(c for c in texto if unicodedata.category(c) != "Mn")
 
 
 def buscar_por_texto(paises, campo, texto, coincidencia_exacta=False):
