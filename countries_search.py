@@ -1,12 +1,9 @@
+from countries_helpers import buscar_por_texto
+
 # • Buscar un país por nombre (coincidencia parcial o exacta).
 def buscar_pais(paises):
     nombre = input("Ingrese el nombre del pais buscado: ")
-    nombre_normalizado = nombre.strip().lower()
-    
-    resultados = []
-    for pais in paises:
-        if nombre_normalizado in pais['nombre'].strip().lower():
-            resultados.append(pais)
+    resultados = buscar_por_texto(paises, 'nombre', nombre)
 
     if len(resultados) == 0:
         print(f"No se encontraron países con '{nombre.strip()}'.")

@@ -4,6 +4,7 @@ from countries_helpers import validar_lista_cargada
 from countries_management import alta_nuevo_pais, modificar_pais
 from countries_search import buscar_pais
 from countries_sort import ordenar_paises
+from countries_filter import filtrar_paises
 
 
 # Menu
@@ -56,7 +57,7 @@ while opcion != 9:
                     ordenar_paises(paises)
             elif opcion == 7:
                 if validar_lista_cargada(paises):
-                    pass
+                    filtrar_paises(paises)
             elif opcion == 8:
                 if validar_lista_cargada(paises):
                     pass

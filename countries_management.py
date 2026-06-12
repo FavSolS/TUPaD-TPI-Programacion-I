@@ -1,4 +1,4 @@
-from countries_helpers import nombre_existe
+from countries_helpers import nombre_existe, leer_entero_no_negativo, normalizar_texto
 from countries_csv import agregar_csv, actualizar_csv
 
 # Agregar un país con todos los datos necesarios para almacenarse (No se permiten campos vacíos).
@@ -14,23 +14,12 @@ def alta_nuevo_pais(paises):
         if nombre_existe(paises, nombre):
             raise ValueError(f"El pais '{nombre.strip()}' ya existe. No se puede volver a cargar.")
 
-        poblacion_str = input(f"Ingrese la poblacion de '{nombre.strip()}': ")
-        try:
-            poblacion = int(poblacion_str)
-        except ValueError:
-            raise ValueError("La población debe ser un número entero.")
-        
-        if poblacion < 0:
-            raise ValueError("La población no puede ser negativa.")
-
-        superficie_str = input(f"Ingrese la superficie de '{nombre.strip()}': ")
-        try:
-            superficie = int(superficie_str)
-        except ValueError:
-            raise ValueError("La superficie debe ser un número entero.")
-        
-        if superficie < 0:
-            raise ValueError("La superficie no puede ser negativa.")
+        poblacion = leer_entero_no_negativo(
+            f"Ingrese la poblacion de '{nombre.strip()}': ", "población"
+        )
+        superficie = leer_entero_no_negativo(
+            f"Ingrese la superficie de '{nombre.strip()}': ", "superficie"
+        )
 
         continente = input(f"Ingrese a que continente pertenece '{nombre.strip()}': ")
 
@@ -53,8 +42,6 @@ def alta_nuevo_pais(paises):
 
 
 # Actualizar los datos de Población y Superficie de un País.
-from countries_helpers import nombre_existe
-from countries_csv import actualizar_csv
 
 def modificar_pais(paises):
     try:
@@ -66,23 +53,14 @@ def modificar_pais(paises):
 
         # busco el pais en la lista
         for pais in paises:
-            if pais['nombre'].lower() == nombre.strip().lower():
+            if normalizar_texto(pais['nombre']) == normalizar_texto(nombre):
                 
-                poblacion_str = input(f"Ingrese la nueva población de '{pais['nombre']}': ")
-                try:
-                    poblacion = int(poblacion_str)
-                except ValueError:
-                    raise ValueError("La población debe ser un número entero.")
-                if poblacion < 0:
-                    raise ValueError("La población no puede ser negativa.")
-
-                superficie_str = input(f"Ingrese la nueva superficie de '{pais['nombre']}': ")
-                try:
-                    superficie = int(superficie_str)
-                except ValueError:
-                    raise ValueError("La superficie debe ser un número entero.")
-                if superficie < 0:
-                    raise ValueError("La superficie no puede ser negativa.")
+                poblacion = leer_entero_no_negativo(
+                    f"Ingrese la nueva población de '{pais['nombre']}': ", "población"
+                )
+                superficie = leer_entero_no_negativo(
+                    f"Ingrese la nueva superficie de '{pais['nombre']}': ", "superficie"
+                )
 
                 pais['poblacion'] = poblacion
                 pais['superficie'] = superficie
