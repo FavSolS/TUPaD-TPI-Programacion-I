@@ -5,6 +5,7 @@ from countries_management import alta_nuevo_pais, modificar_pais
 from countries_search import buscar_pais
 from countries_sort import ordenar_paises
 from countries_filter import filtrar_paises
+from countries_stats import obtener_estadisticas
 
 
 # Menu
@@ -60,7 +61,7 @@ while opcion != 9:
                     filtrar_paises(paises)
             elif opcion == 8:
                 if validar_lista_cargada(paises):
-                    pass
+                    obtener_estadisticas(paises)
             elif opcion == 9:
                 print("Saliendo del sistema. ¡Adiós!")
                 break
