@@ -3,7 +3,7 @@
 # Metodo para crear el archivo por primera vez, se usa el with para garantizar que se cierre correctamente despues de escribir
 def leer_csv():
     paises = []
-    with open("countries.csv", "r") as archivo:
+    with open("countries.csv", "r", encoding="utf-8") as archivo:
         next(archivo)  # saltea el encabezado
         for linea in archivo:
             nombre, poblacion, superficie, continente = linea.strip().split(',')
@@ -21,12 +21,12 @@ def leer_csv():
 
 
 def agregar_csv(nuevo_pais):
-    with open('countries.csv', 'a') as archivo:
+    with open('countries.csv', 'a', encoding='utf-8') as archivo:
         archivo.write(f"{nuevo_pais['nombre']},{nuevo_pais['poblacion']},{nuevo_pais['superficie']},{nuevo_pais['continente']}\n")
 
 
 def actualizar_csv(paises):
-    with open('countries.csv', 'w') as archivo:
+    with open('countries.csv', 'w', encoding='utf-8') as archivo:
         archivo.write("nombre,poblacion,superficie,continente\n")
         for pais in paises:
             linea = f"{pais['nombre']},{pais['poblacion']},{pais['superficie']},{pais['continente']}\n"
