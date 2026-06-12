@@ -1,56 +1,138 @@
-# TUPaD-TPI-Programacion-I
-Gestión de Datos de Países
+# TUPaD — TPI Programación I
 
-Funciones
-El programa debe ofrecer un menú de opciones en consola que permita:
+## Gestión de Datos de Países
 
-• Agregar un país con todos los datos necesarios para almacenarse (No se
-permiten campos vacíos).
-• Actualizar los datos de Población y Superficie de un País.
-• Buscar un país por nombre (coincidencia parcial o exacta).
-• Filtrar países por:
-o Continente
-o Rango de población
-o Rango de superficie
-• Ordenar países por:
-o Nombre
-o Población
-o Superficie (ascendente o descendente)
-• Mostrar estadísticas:
-o País con mayor y menor población
-o Promedio de población
-o Promedio de superficie
-o Cantidad de países por continente
+Aplicación de consola en Python para administrar un listado de países. Los datos se cargan desde un archivo CSV, se manipulan en memoria durante la ejecución y los cambios de alta o modificación se persisten en el mismo archivo.
 
+## Requisitos
 
-Commits convention
-Quick format:
-<type>[optional scope]: <description>
+- Python 3.x
+- No requiere librerías externas
 
-Common types:
+## Cómo ejecutar
 
-feat: new feature
-fix: bug fix
-refactor: code refactoring
-chore: maintenance tasks
-deploy: deployment commits
+Desde la carpeta del proyecto:
 
+```bash
+python main.py
+```
 
-About scopes: Use the modified file name for quick fixes or the feature name for broader changes:
+Al iniciar, seleccionar la opción **1** para cargar los datos desde `countries.csv`. El resto de las operaciones requiere que la lista esté cargada.
 
-File-based: fix(product-card): resolve price display issue
-Feature-based: feat(gwp): add gift with purchase functionality
+## Estructura del proyecto
 
+| Archivo | Descripción |
+|---|---|
+| `main.py` | Punto de entrada y menú principal |
+| `countries.csv` | Base de datos de países (nombre, población, superficie, continente) |
+| `countries_csv.py` | Lectura, alta y actualización del CSV |
+| `countries_helpers.py` | Funciones auxiliares compartidas (validaciones, búsqueda, normalización) |
+| `countries_management.py` | Alta y modificación de países |
+| `countries_search.py` | Búsqueda por nombre |
+| `countries_sort.py` | Ordenamiento de países |
+| `countries_filter.py` | Filtrado por continente, población o superficie |
+| `countries_stats.py` | Estadísticas sobre los datos cargados |
 
-Examples:
-feat(cart): add upsell recommendations module
-fix(product-template): correct image gallery navigation
-refactor(collection): optimize filtering performance
-chore(accessibility): audit fixes
-deploy: #123
+Cada país se representa como un diccionario con las claves: `nombre`, `poblacion`, `superficie` y `continente`.
 
-For deployments: Always include the ActiveCollab task number: (mostly for Dusk theme deployment)
-deploy: #123
-deploy: #456
+## Menú principal
 
-https://www.conventionalcommits.org/en/v1.0.0/#summary
+| Opción | Descripción |
+|---|---|
+| 1 | Cargar países desde `countries.csv` |
+| 2 | Mostrar países *(pendiente de implementación)* |
+| 3 | Buscar país por nombre |
+| 4 | Agregar un nuevo país |
+| 5 | Actualizar población y superficie de un país |
+| 6 | Ordenar países |
+| 7 | Filtrar países |
+| 8 | Obtener estadísticas |
+| 9 | Salir |
+
+## Funcionalidades
+
+### Carga de datos
+
+- Lee el archivo `countries.csv` con codificación UTF-8.
+- La carga solo puede realizarse una vez por ejecución.
+
+### Búsqueda
+
+- Buscar un país por nombre a través del módulo `countries_search.py`.
+- Utiliza `buscar_por_texto` con **coincidencia parcial**: si el texto ingresado aparece dentro del nombre del país, se incluye en los resultados (por ejemplo, `"arg"` devuelve *Argelia* y *Argentina*).
+- Si se ingresa el nombre completo, también funciona como coincidencia exacta.
+- Antes de comparar, el texto se normaliza: se ignoran mayúsculas/minúsculas, espacios al inicio y al final, y acentos (por ejemplo, `"mexico"` encuentra *México*).
+- Muestra todos los países que coincidan o un mensaje si no hay resultados.
+
+### Alta y modificación
+
+- Agregar un país con todos los campos obligatorios (no se permiten campos vacíos).
+- Validación de nombres duplicados al dar de alta.
+- Actualizar población y superficie de un país existente.
+- Los cambios se guardan en `countries.csv`.
+
+### Filtrado
+
+Submenú con las siguientes opciones:
+
+- Por continente (coincidencia parcial).
+- Por rango de población (mínimo y máximo).
+- Por rango de superficie (mínimo y máximo).
+
+### Ordenamiento
+
+- Por nombre, población o superficie.
+- Orden ascendente o descendente.
+
+### Estadísticas
+
+Submenú con las siguientes opciones:
+
+- **Estadísticas de población:** promedio, país(es) con mayor y menor población, top 5 con mayor y menor población, y top 5 más cercanos al promedio.
+- **Estadísticas de superficie:** promedio, país(es) con mayor y menor superficie, top 5 con mayor y menor superficie, y top 5 más cercanos al promedio.
+- **Cantidad de países por continente:** distribución ordenada de mayor a menor.
+
+## Convención de commits
+
+Formato basado en [Conventional Commits](https://www.conventionalcommits.org/es/v1.0.0/):
+
+```
+<tipo>[alcance opcional]: <descripción>
+```
+
+### Tipos habituales
+
+| Tipo | Uso |
+|---|---|
+| `feat` | Nueva funcionalidad |
+| `fix` | Corrección de errores |
+| `refactor` | Refactorización sin cambio de comportamiento |
+| `docs` | Cambios en documentación |
+| `chore` | Tareas de mantenimiento |
+
+### Alcance
+
+Usar el nombre del módulo o la funcionalidad afectada:
+
+- Por archivo: `fix(countries-csv): corregir encoding del archivo`
+- Por feature: `feat(countries-stats): agregar top 5 por población`
+
+### Ejemplos
+
+```
+feat(countries-filter): agregar filtro por rango de superficie
+fix(countries-csv): corregir lectura con caracteres especiales
+feat(countries-stats): implementar estadísticas de población
+docs(readme): actualizar menú y estructura del proyecto
+refactor(countries-helpers): extraer validación de enteros
+```
+
+### Nombres de ramas
+
+Seguir el mismo criterio, separando tipo y descripción con `/`:
+
+```
+feat/countries-stats
+fix/csv-encoding
+docs/update
+```
