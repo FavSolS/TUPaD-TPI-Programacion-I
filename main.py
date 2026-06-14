@@ -14,14 +14,13 @@ from countries_stats import obtener_estadisticas
 def mostrar_menu():
     print("\n===== Gestión de Datos de Países =====")
     print("1. Primera carga de paises desde la base de datos (csv)") #done
-    print("2. Mostrar paises") ##usar paginado --- este podria ser un nice to have porque no lo pide la consigna
-    print("3. Buscar país por nombre") #done
-    print("4. Agregar un nuevo país") #done
-    print("5. Actualizar datos de un país") #done
-    print("6. Ordenar países") 
-    print("7. Filtrar países")
-    print("8. Obtener estadísticas")
-    print("9. Salir")
+    print("2. Buscar país por nombre") #done
+    print("3. Agregar un nuevo país") #done
+    print("4. Actualizar datos de un país") #done
+    print("5. Ordenar países") 
+    print("6. Filtrar países")
+    print("7. Obtener estadísticas")
+    print("8. Salir")
     print("==============================================")
 
     
@@ -30,7 +29,7 @@ paises = []
 # Inicialización de opcion del menu
 opcion = 0
 
-while opcion != 9:
+while opcion != 8:
         mostrar_menu()
         try:
             opcion = int(input("Seleccione una opción: "))
@@ -42,27 +41,24 @@ while opcion != 9:
                 # print para debug/check
                 # print(paises)
             elif opcion == 2:
-               if validar_lista_cargada(paises):
-                pass
-            elif opcion == 3:
                 if validar_lista_cargada(paises):
                     buscar_pais(paises)
-            elif opcion == 4:
+            elif opcion == 3:
                 if validar_lista_cargada(paises):
                     alta_nuevo_pais(paises)
-            elif opcion == 5:
+            elif opcion == 4:
                 if validar_lista_cargada(paises):
                     modificar_pais(paises)
-            elif opcion == 6:
+            elif opcion == 5:
                 if validar_lista_cargada(paises):
                     ordenar_paises(paises)
-            elif opcion == 7:
+            elif opcion == 6:
                 if validar_lista_cargada(paises):
                     filtrar_paises(paises)
-            elif opcion == 8:
+            elif opcion == 7:
                 if validar_lista_cargada(paises):
                     obtener_estadisticas(paises)
-            elif opcion == 9:
+            elif opcion == 8:
                 print("Saliendo del sistema. ¡Adiós!")
                 break
             else:

@@ -31,4 +31,3 @@ def ordenar_paises(paises):
     for pais in resultado:
         print(f"{pais['nombre']} | {pais['poblacion']} | {pais['superficie']} | {pais['continente']}")
 
-        # DUDA tenemos que modificar el archivo csv?
